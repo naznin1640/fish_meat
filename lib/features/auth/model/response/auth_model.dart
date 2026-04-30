@@ -17,3 +17,4 @@ class LoginResponse {
         "message": message,
     };
 }
+

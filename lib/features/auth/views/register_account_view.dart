@@ -1,20 +1,24 @@
 import 'package:fish_meat/core/constants/colors.dart';
+import 'package:fish_meat/features/auth/providers/auth_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateAccountView extends StatelessWidget {
-  CreateAccountView({super.key});
+class CreateAccountView extends ConsumerStatefulWidget {
+  const CreateAccountView({super.key});
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  @override
+  ConsumerState<CreateAccountView> createState() => _CreateAccountViewState();
+}
 
+class _CreateAccountViewState extends ConsumerState<CreateAccountView> {
   final _createKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(authProvider);
+    final pro = ref.read(authProvider.notifier);
     return Scaffold(
-      backgroundColor: blueClr,
+      backgroundColor: ConstantColors.blueClr,
       body: Form(
         key: _createKey,
         child: Padding(
@@ -39,11 +43,12 @@ class CreateAccountView extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
-                      controller: _nameController,
+                      controller: state.nameController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter your name";
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         filled: true,
@@ -53,13 +58,14 @@ class CreateAccountView extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
-                      controller: _emailController,
+                      controller: state.emailController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter your email";
                         } else if (!value.contains("@")) {
                           return "inavlid emil";
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         filled: true,
@@ -69,41 +75,47 @@ class CreateAccountView extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
-                      controller: _passwordController,
+                      controller: state.passwordController,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return "Enter Password";
-                        } else if (value.length < 8) {
-                          return "Password must be 8 characters";
+                          return "Enter password";
+                        } else if (value.length < 5 || value.length > 10) {
+                          return "Password must contain 5 charecters";
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(),
-                        hintText: "Enter Password",
-                      ),
-                    ),
-                    TextFormField(
-                      controller: _phoneController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter your Phone Number";
-                        } else if (value.length < 10 || value.length > 10) {
-                          return "invalid phone Number";
-                        }
-                      },
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(),
-                        hintText: "Enter phone Number",
+                        hintText: "Enter password",
                       ),
                     ),
                     InkWell(
-                      onTap: () {
-                        if (_createKey.currentState!.validate()) {}
-                      },
+                      onTap: state.isLoading
+                          ? null
+                          : () async {
+                              if (_createKey.currentState!.validate()) {
+                                final success = await pro.createAccount();
+
+                                if (!context.mounted) return;
+
+                                if (success) {
+                                  Navigator.pushNamed(context, '/home');
+                                } else {
+                                  final updatedState = ref.read(authProvider);
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        updatedState.error ??
+                                            "Registration failed",
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
+                            },
                       child: Container(
                         height: 50,
                         margin: EdgeInsets.all(30),
@@ -112,13 +124,15 @@ class CreateAccountView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
-                          child: Text(
-                            "Create Account",
-                            style: TextStyle(
-                              color: blueClr,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: state.isLoading
+                              ? CircularProgressIndicator()
+                              : Text(
+                                  "Register",
+                                  style: TextStyle(
+                                    color: ConstantColors.blueClr,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

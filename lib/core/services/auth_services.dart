@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fish_meat/core/constants/api_constants.dart';
-import 'package:fish_meat/features/auth/model/auth_model.dart';
+
 
 class AuthServices {
   late Dio dio;
@@ -28,30 +28,7 @@ class AuthServices {
       },
     )
   );
-  }
-  Future<LoginResponse?> sendOtp (String email)async{
-    try {
-      final response = await dio.post(
-        "send-otp",
-        data: {"email" : email}
-      );
-      return LoginResponse.fromJson(response.data);
-    } catch (e) {
-      return null;
-    }
-  }
-  Future<LoginResponse?> verifyOtp(String email, String otp) async{
-    try {
-      final response = await dio.post(
-        "verify-otp",
-        data: {
-          "email" : email,
-          "otp" : otp
-        }
-      );
-      return LoginResponse.fromJson(response.data);
-    } catch (e) {
-      return null;
-    }
+
+  dio.interceptors.add(LogInterceptor(request: true, requestBody: true, responseBody: true, error: true, requestHeader: false));
   }
 }
