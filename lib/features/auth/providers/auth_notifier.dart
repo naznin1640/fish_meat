@@ -1,5 +1,6 @@
 import 'package:fish_meat/features/auth/model/state/auth_state.dart';
 import 'package:fish_meat/features/auth/repo/auth_repo.dart';
+import 'package:fish_meat/shared/services/shared_pref_svc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
@@ -23,7 +24,24 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     final result = await authRepo.login(state.emailController.text, state.passwordController.text);
 
-    if (result != null && result.success) {
+    if (result != null && result.success == true) {
+
+      await SharedPrefSvc.instance.setValue(
+        SharedPrefKeys.token, 
+        result.data?.token ?? "");
+
+        await SharedPrefSvc.instance.setValue(
+          SharedPrefKeys.isLoggedIn, 
+          true);
+
+          await SharedPrefSvc.instance.setValue(
+            SharedPrefKeys.userName, 
+            result.data?.user?.username ?? "");
+
+            await SharedPrefSvc.instance.setValue(
+              SharedPrefKeys.id, 
+              result.data?.user?.id ??"");
+
       state = state.copyWith(isLoading: false, loginData: result);
       return true;
     } else {
@@ -34,28 +52,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
       return false;
     }
   }
-
-
-
-  // Future<bool> verifyOtp() async {
-  //   state = state.copyWith(isLoading: true, error: null);
-
-  //   final result = await authRepo.verifyOtp(
-  //     state.emailController.text,
-  //     state.passwordController.text,
-  //   );
-
-  //   if (result != null && result.success) {
-  //     state = state.copyWith(isLoading: false, loginData: result);
-  //     return true;
-  //   } else {
-  //     state = state.copyWith(
-  //       isLoading: false,
-  //       error: result?.message ?? "Inavlid Otp",
-  //     );
-  //     return false;
-  //   }
-  // }
 
   Future<bool> createAccount() async {
     state = state.copyWith(
@@ -89,4 +85,3 @@ class AuthNotifier extends StateNotifier<AuthState> {
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   return (AuthNotifier(ref.read(authrepoProvider)));
 });
-

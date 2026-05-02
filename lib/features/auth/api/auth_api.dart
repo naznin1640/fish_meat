@@ -21,21 +21,6 @@ Future<LoginResponse?> login (String email, String password)async{
     }
   }
 
-
-  // Future<LoginResponse?> verifyOtp(String email, String password) async{
-  //   try {
-  //     final response = await dio.post(
-  //       "/auth/verify",
-  //       data: {
-  //         "email" : email,
-  //         "otp" : otp
-  //       }
-  //     );
-  //     return LoginResponse.fromJson(response.data);
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
   Future<RegisterModel?> createAccount(
     String username,
     String email,

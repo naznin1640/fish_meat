@@ -1,14 +1,16 @@
+import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/landing/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class Homescreen extends StatelessWidget {
+  const Homescreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(title: "Profile"),
-      body: Container(
+      appBar: AppBarWidget(
+        title: "Categories"),
+        body: Container(
           height: double.infinity,
           decoration: BoxDecoration(
             color: Colors.white,

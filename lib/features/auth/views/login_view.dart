@@ -1,6 +1,6 @@
 import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/features/auth/providers/auth_notifier.dart';
-import 'package:fish_meat/features/landing/bottom_nav.dart';
+import 'package:fish_meat/landing/view/landing_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -123,7 +123,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                               if (_formKey.currentState!.validate()) {
                                 final succes = await pro.login();
                                 if (succes && context.mounted) {
-                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNav()));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingView()));
                                 } else {
                                   final updatedState = ref.read(authProvider);
                                   ScaffoldMessenger.of(context).showSnackBar(
