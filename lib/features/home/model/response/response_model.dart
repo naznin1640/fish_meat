@@ -64,7 +64,7 @@ class Pagination {
 
 class Product {
     final String id;
-    final ProductUserId userId;
+    final String userId;
     final String title;
     final String description;
     final int price;
@@ -91,7 +91,7 @@ class Product {
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
-        userId: productUserIdValues.map[json["userId"]]!,
+        userId: json["userId"],
         title: json["title"],
         description: json["description"],
         price: json["price"],
@@ -105,7 +105,7 @@ class Product {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "userId": productUserIdValues.reverse[userId],
+        "userId":userId,
         "title": title,
         "description": description,
         "price": price,

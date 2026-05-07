@@ -1,3 +1,4 @@
+import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/landing/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,22 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(30)
           ),
-          // child: ,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              spacing: 4,
+              children: [
+                Center(
+                  child: CircleAvatar(
+                    radius: 60,
+                    // backgroundImage: ,
+                    child: Icon(Icons.person, size: 65,),
+                    ),
+                ),
+                Text("Naznin", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ConstantColors.blueClr),)
+              ],
+            ),
+          ),
         ),
     );
   }

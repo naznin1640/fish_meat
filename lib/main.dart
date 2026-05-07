@@ -1,4 +1,5 @@
 import 'package:fish_meat/core/constants/colors.dart';
+import 'package:fish_meat/features/auth/api/auth_api.dart';
 import 'package:fish_meat/features/auth/views/register_account_view.dart';
 import 'package:fish_meat/features/auth/views/login_view.dart';
 import 'package:fish_meat/features/home/views/homescreen.dart';
@@ -11,10 +12,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefSvc.instance.init();
+  final savedToken = SharedPrefSvc.instance.getValue(SharedPrefKeys.token, "");
+  if(savedToken.isNotEmpty){
+  AuthApi.globaltoken = savedToken;
+  }
   runApp(ProviderScope(
     child: const MyApp()));
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -37,3 +41,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

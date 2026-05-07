@@ -30,6 +30,7 @@ void checkLogin(){
         context, 
       MaterialPageRoute(builder:(_) => LandingView()));
       }else{
+        if(!mounted) return;
         Navigator.pushReplacement(
           context, 
           MaterialPageRoute(builder: (_) => LoginView()));

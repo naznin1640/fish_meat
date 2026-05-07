@@ -126,6 +126,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingView()));
                                 } else {
                                   final updatedState = ref.read(authProvider);
+                                  
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -147,10 +148,12 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         child: Center(
                           child: state.isLoading
                               ? CircularProgressIndicator()
+                              
                               : Text(
                                   "Login",
                                   style: TextStyle(color: Colors.white),
                                 ),
+                                
                         ),
                       ),
                     ),

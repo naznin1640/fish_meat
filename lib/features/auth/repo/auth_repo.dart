@@ -13,11 +13,6 @@ Future<LoginResponse?> login(String email, String password) async {
   return await authApi.login(email, password);
 }
 
-// Future<LoginResponse?> verifyOtp(String email, String otp) async{
-//   return await authApi.verifyOtp(email, otp);
-// }
-
-
 Future<RegisterModel?> createAccount(String username, String email, String password) async{
   return await authApi.createAccount(username, email, password);
 }
