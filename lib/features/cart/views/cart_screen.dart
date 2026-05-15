@@ -88,7 +88,6 @@ class _CheckoutBottomSheetState extends ConsumerState<CheckoutBottomSheet> {
   void initState() {
     super.initState();
 
-
     _razorpayHelper = RazorpayHelper(
       onSuccess: () {
         ref.read(cartProvider.notifier).fetchCart();
@@ -146,7 +145,6 @@ class _CheckoutBottomSheetState extends ConsumerState<CheckoutBottomSheet> {
     super.dispose();
   }
 
-
   void _onSelectAddress(Map<String, String> addr) {
     setState(() {
       _selectedAddressKey = addr['label'];
@@ -154,19 +152,22 @@ class _CheckoutBottomSheetState extends ConsumerState<CheckoutBottomSheet> {
       _pincodeCtrl.text = addr['pincode'] ?? '';
     });
   }
-  Future<void> _pickDate() async{
-  final picked = await showDatePicker(
-    context: context, 
-    initialDate: DateTime.now().add(Duration(days: 1)),
-    firstDate: DateTime.now().add(Duration(days: 1)),
-     lastDate: DateTime.now().add(Duration(days: 30)));
 
-     if(picked != null){
+  Future<void> _pickDate() async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now().add(Duration(days: 1)),
+      firstDate: DateTime.now().add(Duration(days: 1)),
+      lastDate: DateTime.now().add(Duration(days: 30)),
+    );
+
+    if (picked != null) {
       setState(() {
-        _selectedPreOrderDate = "${picked.day.toString().padLeft(2, '0')}/ ${picked.month.toString().padLeft(2, '0')}/ ${picked.year}";
+        _selectedPreOrderDate =
+            "${picked.day.toString().padLeft(2, '0')}/ ${picked.month.toString().padLeft(2, '0')}/ ${picked.year}";
       });
-     }
-}
+    }
+  }
 
   void _placeOrder() async {
     if (_addressCtrl.text.trim().isEmpty || _pincodeCtrl.text.trim().isEmpty) {
@@ -406,52 +407,70 @@ class _CheckoutBottomSheetState extends ConsumerState<CheckoutBottomSheet> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.schedule, color: ConstantColors.blueClr,size: 20),
+                          Icon(
+                            Icons.schedule,
+                            color: ConstantColors.blueClr,
+                            size: 20,
+                          ),
                           SizedBox(width: 8),
-                          Text("Schedule pre-order", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),)
+                          Text(
+                            "Schedule pre-order",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
                         ],
                       ),
-                      Switch(value: _isPreOrder, 
-                      activeThumbColor: ConstantColors.blueClr,
-                      onChanged: (val){
-                        setState(() {
-                          _isPreOrder = val;
-                          if(!val) _selectedPreOrderDate = null;
-                        });
-                      })
+                      Switch(
+                        value: _isPreOrder,
+                        activeThumbColor: ConstantColors.blueClr,
+                        onChanged: (val) {
+                          setState(() {
+                            _isPreOrder = val;
+                            if (!val) _selectedPreOrderDate = null;
+                          });
+                        },
+                      ),
                     ],
                   ),
 
-                  if(_isPreOrder) ...[
+                  if (_isPreOrder) ...[
                     SizedBox(height: 10),
                     GestureDetector(
                       onTap: _pickDate,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: ConstantColors.blueClr)
+                          border: Border.all(color: ConstantColors.blueClr),
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.calendar_today, color: ConstantColors.blueClr,size: 18),
+                            Icon(
+                              Icons.calendar_today,
+                              color: ConstantColors.blueClr,
+                              size: 18,
+                            ),
                             SizedBox(width: 10),
                             Text(
                               _selectedPreOrderDate ?? "selected deliver date",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: _selectedPreOrderDate != null
-                                ?const Color(0xFF1A2B3C)
-                                :Colors.grey
+                                    ? const Color(0xFF1A2B3C)
+                                    : Colors.grey,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
-                    )
-                  ]
-
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:fish_meat/core/constants/colors.dart';
-import 'package:fish_meat/landing/model/state/landing_state.dart';
+import 'package:fish_meat/features/landing/model/state/landing_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
 

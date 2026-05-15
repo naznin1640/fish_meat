@@ -6,7 +6,7 @@ import 'package:fish_meat/features/auth/views/register_account_view.dart';
 import 'package:fish_meat/features/auth/views/login_view.dart';
 import 'package:fish_meat/features/home/views/homescreen.dart';
 import 'package:fish_meat/firebase_options.dart';
-import 'package:fish_meat/landing/view/landing_view.dart';
+import 'package:fish_meat/features/landing/view/landing_view.dart';
 import 'package:fish_meat/features/splash/view/splash_view.dart';
 import 'package:fish_meat/shared/services/shared_pref_svc.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,6 @@ class _MyAppState extends State<MyApp> {
         'bottomnav' : (context) => LandingView(),
         '/home' : (context) => Homescreen()
       },
-      // home: ,
     );
   }
 }

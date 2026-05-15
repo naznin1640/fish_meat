@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:fish_meat/core/services/api_services.dart';
+import 'package:fish_meat/shared/services/api_services.dart';
 import 'package:fish_meat/features/orders/model/response/order_response.dart';
 
 class OrderApi {

@@ -1,6 +1,6 @@
 import 'package:fish_meat/features/notification/model/notification_model.dart';
 import 'package:fish_meat/features/orders/providers/order_notifier.dart';
-import 'package:fish_meat/landing/widgets/bottom_nav_widget.dart';
+import 'package:fish_meat/features/landing/widgets/bottom_nav_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

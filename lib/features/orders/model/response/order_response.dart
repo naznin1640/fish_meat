@@ -1,3 +1,5 @@
+
+
 class OrderResponse {
   final bool success;
   final String message;
@@ -89,18 +91,25 @@ class Order {
         pincode: json["pincode"]?.toString(),
         razorpayOrderId: json["razorpayOrderId"]?.toString(),
         paymentId: json["paymentId"]?.toString(),
-        preOrder: json["preOrder"]?.toString(),
-      );
+        preOrder: (json["preOrder"] == null ||
+        json["preOrder"].toString() == "null" ||
+        json["preOrder"].toString().isEmpty)
+    ? null
+    : json["preOrder"].toString(),
+        );
+       
 
+       
   bool get isActive =>
       status == "PAID" ||
+      status == "PENDING" ||
       status == "CONFIRMED" ||
       status == "PACKED" ||
       status == "ON_THE_WAY";
 
   bool get isDelivered => status == "DELIVERED";
 
-  bool get isPreOrder => preOrder != null;
+  bool get isPreOrder => preOrder != null && preOrder!.isNotEmpty && preOrder != "null";
 
   String get statusLabel {
     switch (status) {

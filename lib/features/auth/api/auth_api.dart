@@ -1,7 +1,6 @@
-
 import 'package:dio/dio.dart';
 import 'package:fish_meat/core/constants/api_constants.dart';
-import 'package:fish_meat/core/services/api_services.dart';
+import 'package:fish_meat/shared/services/api_services.dart';
 import 'package:fish_meat/features/auth/model/response/auth_model.dart';
 import 'package:fish_meat/features/auth/model/response/register_model.dart';
 
@@ -9,6 +8,8 @@ class AuthApi {
   
   final dio = ApiServices().dio;
   static String? globaltoken; 
+  
+
 Future<LoginResponse?> login(String email, String password) async {
   try {
     final response = await dio.post(
@@ -19,18 +20,24 @@ Future<LoginResponse?> login(String email, String password) async {
       },
     );
 
-    final loginResponse = LoginResponse.fromJson(response.data);
+if(response.statusCode == 200 || response.data == 201){
 
-    globaltoken = loginResponse.data?.token;
+final loginResponse = LoginResponse.fromJson(response.data);
 
+if(loginResponse.success == true){
+  globaltoken = loginResponse.data?.token;
+  
     print("TOKEN SAVED: $globaltoken"); 
 
-    return loginResponse;
+     return loginResponse;
+}
+}  
   } catch (e) {
     print("LOGIN ERROR: $e");
     return null;
   }
 }
+
 
   Future<RegisterModel?> createAccount(
     String username,
@@ -46,9 +53,11 @@ Future<LoginResponse?> login(String email, String password) async {
          "password" : password
        }
       );
+      
       return RegisterModel.fromJson(res.data);
     } on DioException catch (e) {
       throw e.response?.data["message"];
     }
   }
 }
+

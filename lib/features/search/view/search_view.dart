@@ -1,4 +1,3 @@
-import 'package:fish_meat/features/home/views/product_detail_screen.dart';
 import 'package:fish_meat/features/search/providers/search_notifier.dart';
 import 'package:fish_meat/features/search/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +11,8 @@ class SearchScreen extends ConsumerWidget {
     final state = ref.watch(searchProvider);
     final notifier = ref.read(searchProvider.notifier);
 
-    final category = state.selectedCategory;
-    final products = state.categorized[category] ?? [];
+    // final category = state.selectedCategory;
+    // final products = state.categorized[category] ?? [];
 
     return Scaffold(
       body: Container(
@@ -48,7 +47,6 @@ class SearchScreen extends ConsumerWidget {
                       ),
                       itemBuilder: (context, index) {
                         final product = state.searchResult[index];
-
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ProductCard(product: product),

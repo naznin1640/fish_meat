@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final Product? product;
 
-  const ProductCard({this.product});
+  const ProductCard({super.key, this.product});
 
   @override
   Widget build(BuildContext context) {

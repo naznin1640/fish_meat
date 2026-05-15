@@ -1,6 +1,6 @@
 import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/features/auth/providers/auth_notifier.dart';
-import 'package:fish_meat/landing/view/landing_view.dart';
+import 'package:fish_meat/features/landing/view/landing_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

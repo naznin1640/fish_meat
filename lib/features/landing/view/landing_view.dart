@@ -5,8 +5,8 @@ import 'package:fish_meat/features/orders/providers/order_notifier.dart';
 import 'package:fish_meat/features/orders/view/order_screen.dart';
 import 'package:fish_meat/features/profile/view/profile_screen.dart';
 import 'package:fish_meat/features/search/view/search_view.dart';
-import 'package:fish_meat/landing/widgets/app_bar_widget.dart';
-import 'package:fish_meat/landing/widgets/bottom_nav_widget.dart';
+import 'package:fish_meat/features/landing/widgets/app_bar_widget.dart';
+import 'package:fish_meat/features/landing/widgets/bottom_nav_widget.dart';
 import 'package:fish_meat/shared/utilities/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,6 +36,7 @@ class LandingView extends ConsumerStatefulWidget{
      NotificationScreen()
     );
   }
+  @override
   Widget build(BuildContext context) {
     final currentIndex = ref.watch(navIndexProvider);
 

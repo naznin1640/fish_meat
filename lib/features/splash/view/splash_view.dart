@@ -1,6 +1,6 @@
 import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/features/auth/views/login_view.dart';
-import 'package:fish_meat/landing/view/landing_view.dart';
+import 'package:fish_meat/features/landing/view/landing_view.dart';
 import 'package:fish_meat/shared/services/shared_pref_svc.dart';
 import 'package:flutter/material.dart';
 

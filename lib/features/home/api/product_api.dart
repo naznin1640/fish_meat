@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fish_meat/core/constants/api_constants.dart';
-import 'package:fish_meat/core/services/api_services.dart';
+import 'package:fish_meat/shared/services/api_services.dart';
 import 'package:fish_meat/features/home/model/response/response_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

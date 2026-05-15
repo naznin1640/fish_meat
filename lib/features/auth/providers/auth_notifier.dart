@@ -16,6 +16,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   final AuthRepo authRepo;
 
+
   Future<bool> login() async {
     state = state.copyWith(
       isLoading: true,
@@ -66,8 +67,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
 
     if (result != null) {
-      state = state.copyWith(isLoading: false, data: result);
-      return true;
+      await SharedPrefSvc.instance.setValue(
+        SharedPrefKeys.isLoggedIn, 
+        true);
+        await SharedPrefSvc.instance.setValue(
+          SharedPrefKeys.userName, 
+          result.username ?? "");
+           
+           state  = state.copyWith(
+            isLoading: false,
+            data: result
+           );
+           return true;
     }
   } catch (e) {
     state = state.copyWith(

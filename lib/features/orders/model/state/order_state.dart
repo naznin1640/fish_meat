@@ -13,14 +13,12 @@ class OrderState {
     this.error,
   });
 
-  List<Order> get activeOrders =>
-      orders.where((o) => o.isActive && !o.isPreOrder).toList();
 
-  // List<Order> get pastOrders =>
-  //     orders.where((o) => o.isPast).toList();
+List<Order> get activeOrders =>
+    orders.where((o) => o.isActive && !o.isPreOrder).toList();
 
-  List<Order> get preOrders =>
-      orders.where((o) => o.isPreOrder).toList();
+List<Order> get preOrders =>
+    orders.where((o) => o.isPreOrder).toList();
 
   OrderState copyWith({
     bool? isLoading,
