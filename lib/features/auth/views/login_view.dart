@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
+  
 
   @override
   ConsumerState<LoginView> createState() => _LoginViewState();
@@ -126,7 +127,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingView()));
                                 } else {
                                   final updatedState = ref.read(authProvider);
-                                  
+                                  if(!context.mounted) return;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(

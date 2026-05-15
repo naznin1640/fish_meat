@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "174725538502",
+    "project_id": "fish-and-meat-5412e",
+    "storage_bucket": "fish-and-meat-5412e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174725538502:android:9e2ddfd2aa4577e2ba2dc7",
+        "android_client_info": {
+          "package_name": "com.example.fish_meat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIzrGoqiWJzdYwmidyczIRv4SJlGV8I8g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

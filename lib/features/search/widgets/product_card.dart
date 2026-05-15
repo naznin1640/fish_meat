@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final Product? product;
 
-  const ProductCard({ this.product});
+  const ProductCard({this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +149,8 @@ class ProductCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Spacer(),
-                    if (product?.reviews != null && product!.reviews!.isNotEmpty)
+                    if (product?.reviews != null &&
+                        product!.reviews!.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4),
                         child: Row(
@@ -234,7 +235,8 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
- String _avgRating(List<Review> reviews) {
+
+  String _avgRating(List<Review> reviews) {
     if (reviews.isEmpty) return '0.0';
     final avg =
         reviews.map((r) => r.rating).reduce((a, b) => a + b) / reviews.length;

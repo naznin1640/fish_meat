@@ -38,6 +38,12 @@ dependencies:
   dio: ^5.9.2
   json_serializable: ^6.13.1
   shared_preferences: ^2.5.5
+  firebase_core: ^4.7.0
+  firebase_messaging: ^16.2.0
+  flutter_local_notifications: ^21.0.0
+  cloud_firestore: ^6.3.0
+  intl: ^0.20.2
+  razorpay_flutter: ^1.4.5
 
 dev_dependencies:
   flutter_test:

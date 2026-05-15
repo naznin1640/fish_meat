@@ -13,7 +13,6 @@ class ProductNotifier extends StateNotifier<ProductState> {
     return value.toLowerCase().trim();
   }
 
- 
   Future<void> fetchProducts() async {
     state = state.copyWith(isLoading: true, error: null);
 
@@ -25,8 +24,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
 
         final categorized = _categorize(products);
 
-       
-          print(" Products count: ${products.length}");
+        print(" Products count: ${products.length}");
         print(" Categories: ${categorized.keys}");
 
         state = state.copyWith(
@@ -41,14 +39,10 @@ class ProductNotifier extends StateNotifier<ProductState> {
         );
       }
     } catch (e) {
-      state = state.copyWith(
-        isLoading: false,
-        error: e.toString(),
-      );
+      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
-  
   Map<String, List<Product>> _categorize(List<Product> products) {
     final Map<String, List<Product>> map = {};
 
@@ -68,8 +62,8 @@ class ProductNotifier extends StateNotifier<ProductState> {
   }
 }
 
-
-final productProvider =
-    StateNotifierProvider<ProductNotifier, ProductState>((ref) {
+final productProvider = StateNotifierProvider<ProductNotifier, ProductState>((
+  ref,
+) {
   return ProductNotifier(ProductRepo(ref.read(productApiProvider)));
 });

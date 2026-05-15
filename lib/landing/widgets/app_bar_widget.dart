@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
+  final TabBar? bottom;
 
-  const AppBarWidget({super.key, required this.title, this.actions});
+  const AppBarWidget({super.key, required this.title, this.actions,  this.bottom});
 
   @override
   Widget build(BuildContext context) {

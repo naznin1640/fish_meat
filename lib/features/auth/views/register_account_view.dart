@@ -1,5 +1,6 @@
 import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/features/auth/providers/auth_notifier.dart';
+import 'package:fish_meat/landing/view/landing_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -101,7 +102,7 @@ class _CreateAccountViewState extends ConsumerState<CreateAccountView> {
                                 if (!context.mounted) return;
 
                                 if (success) {
-                                  Navigator.pushNamed(context, '/home');
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LandingView()));
                                 } else {
                                   final updatedState = ref.read(authProvider);
 

@@ -50,7 +50,7 @@ class CategoryProductScreen extends ConsumerWidget {
           : GridView.builder(
               itemCount: products.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                 childAspectRatio: 0.62,
+                childAspectRatio: 0.62,
                 crossAxisCount: 2,
               ),
               itemBuilder: (context, index) {
@@ -59,15 +59,18 @@ class CategoryProductScreen extends ConsumerWidget {
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
-                        context, MaterialPageRoute(
-                          builder:(context)=> ProductDetailScreen(product:products[index],) ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ProductDetailScreen(product: products[index]),
+                        ),
+                      );
                     },
-                    child: ProductCard(product: products[index])),
+                    child: ProductCard(product: products[index]),
+                  ),
                 );
               },
             ),
     );
   }
 }
-
-

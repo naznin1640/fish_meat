@@ -7,7 +7,7 @@ class CartApi {
 
   static String cart = "/carts";
 
-  Future<bool> addToCart(CartItem item) async{
+  Future<bool> addToCart(CartItem item) async {
     try {
       final res = await dio.post(cart, data: item.toRequestBody());
       return res.data["success"] == true;
@@ -17,8 +17,7 @@ class CartApi {
     }
   }
 
-
-  Future<CartResponse?> getCart() async{
+  Future<CartResponse?> getCart() async {
     try {
       final res = await dio.get(cart);
       return CartResponse.fromJson(res.data);
@@ -28,38 +27,33 @@ class CartApi {
     }
   }
 
-  Future<bool> removeFromCart(String cartItemId) async{
+  Future<bool> removeFromCart(String cartItemId) async {
     try {
       final res = await dio.delete('$cart/$cartItemId');
       return res.data["success"] == true;
     } on DioException catch (e) {
-       print("REMOVE FROM CART ERROR: ${e.response?.data}");
+      print("REMOVE FROM CART ERROR: ${e.response?.data}");
       return false;
     }
   }
 
-
-  Future<bool> increaseQuantity( String cartItemId) async{
+  Future<bool> increaseQuantity(String cartItemId) async {
     try {
       final res = await dio.get('$cart/$cartItemId/increase');
       return res.data["success"] == true;
-    }on DioException catch (e) {
+    } on DioException catch (e) {
       print("increse quantity error: ${e.response?.data}");
       return false;
     }
   }
 
-  Future<bool> decreaseQuantity(String cartItemId) async{
+  Future<bool> decreaseQuantity(String cartItemId) async {
     try {
       final res = await dio.get('$cart/$cartItemId/decrease');
       return res.data["success"] == true;
-    }on DioException catch (e) {
+    } on DioException catch (e) {
       print("decrese quantity error: ${e.response?.data} ");
       return false;
     }
   }
 }
-
-
-
-

@@ -1,7 +1,6 @@
 import 'package:fish_meat/core/constants/colors.dart';
 import 'package:fish_meat/features/home/providers/product_notifier.dart';
 import 'package:fish_meat/features/home/views/category_product_screen.dart';
-import 'package:fish_meat/landing/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,7 +54,6 @@ class _HomescreenState extends ConsumerState<Homescreen> {
     ];
 
     return Scaffold(
-      appBar: AppBarWidget(title: "Categories"),
       body: Container(
         height: double.infinity,
         decoration: BoxDecoration(

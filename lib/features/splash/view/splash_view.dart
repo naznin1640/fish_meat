@@ -3,7 +3,7 @@ import 'package:fish_meat/features/auth/views/login_view.dart';
 import 'package:fish_meat/landing/view/landing_view.dart';
 import 'package:fish_meat/shared/services/shared_pref_svc.dart';
 import 'package:flutter/material.dart';
- 
+
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -18,26 +18,28 @@ class _SplashViewState extends State<SplashView> {
     checkLogin();
   }
 
-void checkLogin(){
-  final isLoggedIn = SharedPrefSvc.instance.getValue(
-    SharedPrefKeys.isLoggedIn, 
-    false);
+  void checkLogin() {
+    final isLoggedIn = SharedPrefSvc.instance.getValue(
+      SharedPrefKeys.isLoggedIn,
+      false,
+    );
 
-    Future.delayed(Duration(seconds: 2), (){
-      if (isLoggedIn){
-        if(!mounted) return;
-      Navigator.pushReplacement(
-        context, 
-      MaterialPageRoute(builder:(_) => LandingView()));
-      }else{
-        if(!mounted) return;
+    Future.delayed(Duration(seconds: 2), () {
+      if (isLoggedIn) {
+        if (!mounted) return;
         Navigator.pushReplacement(
-          context, 
-          MaterialPageRoute(builder: (_) => LoginView()));
+          context,
+          MaterialPageRoute(builder: (_) => LandingView()),
+        );
+      } else {
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => LoginView()),
+        );
       }
     });
-}
-
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -12,6 +12,7 @@ class SearchNotifier extends StateNotifier<SearchState> {
   final products = ref.read(productProvider).products;
 
   final lowerQuery = query.toLowerCase();
+  
 
   final result = products.where((products){
     return products.title.toLowerCase().contains(lowerQuery) ||

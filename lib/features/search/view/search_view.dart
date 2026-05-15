@@ -1,13 +1,11 @@
 import 'package:fish_meat/features/home/views/product_detail_screen.dart';
 import 'package:fish_meat/features/search/providers/search_notifier.dart';
 import 'package:fish_meat/features/search/widgets/product_card.dart';
-import 'package:fish_meat/landing/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,53 +16,49 @@ class SearchScreen extends ConsumerWidget {
     final products = state.categorized[category] ?? [];
 
     return Scaffold(
-      appBar: const AppBarWidget(title: "Search"),
       body: Container(
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30)
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: TextField(
-                  onChanged: notifier.search,
-                  decoration: InputDecoration(
-                    hintText: "Search products...",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    )
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15),
+              child: TextField(
+                onChanged: notifier.search,
+                decoration: InputDecoration(
+                  hintText: "Search products...",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
-              Expanded(
-                child: state.searchResult.isEmpty
-                ? const Center(child: Text("No Results"))
-                : GridView.builder(
-                  itemCount: state.searchResult.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 0.62,
-                    crossAxisCount: 2 ), 
-                    itemBuilder: (context, index){
-                      final product = state.searchResult[index];
+            ),
+            Expanded(
+              child: state.searchResult.isEmpty
+                  ? const Center(child: Text("No Results"))
+                  : GridView.builder(
+                      itemCount: state.searchResult.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.62,
+                        crossAxisCount: 2,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = state.searchResult[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(context, 
-                            MaterialPageRoute(builder: (context) => ProductDetailScreen(product: products[index],)));
-                          },
-
-                          child: ProductCard(product:product)),
-                      );
-                    }))
-            ],
-          )
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ProductCard(product: product),
+                        );
+                      },
+                    ),
+            ),
+          ],
         ),
+      ),
     );
   }
 }

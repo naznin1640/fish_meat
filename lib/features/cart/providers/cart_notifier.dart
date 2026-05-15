@@ -5,9 +5,9 @@ import 'package:fish_meat/features/home/model/response/response_model.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 class CartNotifier extends StateNotifier<CartState> {
-  CartNotifier(this.repo): super(CartState());
+  CartNotifier(this.repo) : super(CartState());
 
-final CartRepo repo;
+  final CartRepo repo;
 
   CartItem fromProduct(Product product) => CartItem(
     id: product.id,
@@ -20,44 +20,41 @@ final CartRepo repo;
     offerPrice: product.offerPrice,
     reviews: product.reviews ?? [],
     availability: product.availability,
-    category: product.category, 
-      );
+    category: product.category,
+  );
 
-
-  Future<bool> addToCart(Product product) async{
+  Future<bool> addToCart(Product product) async {
     state = state.copyWith(isAdding: true, error: null);
     final item = fromProduct(product);
     final success = await repo.addToCart(item);
-    if(success){
+    if (success) {
       await fetchCart();
-    }else{
+    } else {
       state.copyWith(isAdding: false, error: "failed add to cart");
     }
     return success;
-  }    
+  }
 
-
-  Future<void> fetchCart() async{
+  Future<void> fetchCart() async {
     state = state.copyWith(isLoading: true, error: null);
     final res = await repo.getCart();
-    if(res!= null && res.success){
-    state = state.copyWith(
-        isLoading: false,
-        isAdding: false,
-        items: res.data
-      );
-    }else{
+    if (res != null && res.success) {
       state = state.copyWith(
         isLoading: false,
         isAdding: false,
-        error: res?.message ?? "failed to load cart"
+        items: res.data,
+      );
+    } else {
+      state = state.copyWith(
+        isLoading: false,
+        isAdding: false,
+        error: res?.message ?? "failed to load cart",
       );
     }
   }
 
-  
   Future<void> removeFromCart(CartItem item) async {
-    if(item.id == null) return;
+    if (item.id == null) return;
     state = state.copyWith(isLoading: true);
     final success = await repo.removeFromCart(item.id!);
     if (success) {
@@ -67,34 +64,24 @@ final CartRepo repo;
     }
   }
 
-
   Future<void> increaseQuantity(CartItem item) async {
-    if(item.id == null) return;
+    if (item.id == null) return;
     final success = await repo.increaseQuantity(item.id!);
     if (success) await fetchCart();
   }
 
-  Future<void> decreaseQuantity(CartItem item) async{
-    if(item.id == null) return;
-    if(item.quantity <=1){
+  Future<void> decreaseQuantity(CartItem item) async {
+    if (item.id == null) return;
+    if (item.quantity <= 1) {
       await removeFromCart(item);
       return;
     }
 
-     final success = await repo.decreaseQuantity(item.id!);
+    final success = await repo.decreaseQuantity(item.id!);
     if (success) await fetchCart();
-    
   }
-  
 }
 
 final cartProvider = StateNotifierProvider<CartNotifier, CartState>((ref) {
   return CartNotifier(ref.read(cartRepoProvider));
 });
-
-
-
-
-
-
-

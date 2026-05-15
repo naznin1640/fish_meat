@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/legacy.dart';
 
 
 final navIndexProvider = StateProvider<int>((ref) => 0);
+final titleProvider = StateProvider<int>((ref) => 0);
 
 class BottomNavWidget extends ConsumerWidget {
   const BottomNavWidget({super.key});
@@ -12,6 +13,7 @@ class BottomNavWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(navIndexProvider);
+    final currentTitle = ref.watch(titleProvider);
 
     return BottomNavigationBar(
       currentIndex: currentIndex,
@@ -24,6 +26,7 @@ class BottomNavWidget extends ConsumerWidget {
 
       onTap: (index) {
         ref.read(navIndexProvider.notifier).state = index;
+        ref.read(titleProvider.notifier).state = index;
       },
 
       items: const [
